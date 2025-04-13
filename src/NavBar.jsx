@@ -15,8 +15,8 @@ export default function NavBar() {
   }
 
   return (
-    <nav className="bg-indigo-700  shadow-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="bg-indigo-700  shadow-md ">
+      <div className="mx-auto px-4 md:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           {/* Logo */}
           <div className="text-2xl font-bold text-white">ShopMate</div>
@@ -30,7 +30,7 @@ export default function NavBar() {
           </div>
 
           {/* Search Bar */}
-          <div className="hidden md:flex flex-grow max-w-md">
+          <div className="hidden md:flex  max-w-md">
             <input
               type="text"
               placeholder="Search for products..."

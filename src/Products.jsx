@@ -12,7 +12,7 @@ export default function Products() {
     "price" : "",
   })
   const [editFormData,setEditFormData] = useState({
-    "name" : "sgjuuzz",
+    "name" : "",
     "description" : "",
     "price" : "",
   })
@@ -105,7 +105,6 @@ const [messageType, setMessageType] = useState("")
     />
     <input
       type="text"
-      placeholder="Description"
       value = {formData.description}
       onChange={(e)=>{
         setFormData({
@@ -113,6 +112,7 @@ const [messageType, setMessageType] = useState("")
           "description" : e.target.value
         })
       }}
+      placeholder = {formData.description ? "" : "Enter Description"}
       className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
     <input

@@ -18,9 +18,9 @@ instance.interceptors.response.use(function (response) {
     // Do something with response data
     return response;
   }, function (error) {
-    alert(error.response.status)
+    // alert(error.response.status)
     if(error.response.status==401){
-        alert(error.response.status)
+       
         localStorage.clear();
         window.location.href = "/login";
     }

@@ -1,6 +1,4 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 
 export default function Product({item,setEditFormData,editData,isOpen,setIsOpen,deleteData}) {

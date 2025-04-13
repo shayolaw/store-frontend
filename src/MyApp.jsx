@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import { useState, useEffect } from 'react'
-import './index.css'
+// import './index.css'
 import App from './App.jsx'
 import Login from './Login.jsx'
 import Products from './Products.jsx'
@@ -11,10 +11,10 @@ import { AuthContext } from '../context/AuthContext.jsx'
 import NavBar from './NavBar.jsx'
 
 export default function MyApp() {
-    const [auth,setAuth] = useState({
-    })
+    const [auth,setAuth] = useState({})
       useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
+        console.log("hi")
         console.log(loggedInUser)
         if (loggedInUser != undefined) {
           const foundUser = JSON.parse(loggedInUser);
@@ -23,6 +23,7 @@ export default function MyApp() {
       }, []);
 
   return (
+
     <AuthContext.Provider value={{auth,setAuth}}>
     <NavBar  />
     <BrowserRouter>

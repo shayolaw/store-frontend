@@ -13,7 +13,7 @@ export default function EditProduct({setEditFormData,editData,isOpen,setIsOpen,h
       <DialogBody className='text-black'>
       <input
       type="text"
-      placeholder="Product Name"
+    //   placeholder="Product Name"
       className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
       value = {editData.name}
       onChange={(e)=>{
@@ -22,7 +22,7 @@ export default function EditProduct({setEditFormData,editData,isOpen,setIsOpen,h
     />
     <input
       type="text"
-      placeholder="Description"
+    //   placeholder="Description"
       className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
       value = {editData.description}
       onChange={(e)=>{
@@ -31,7 +31,7 @@ export default function EditProduct({setEditFormData,editData,isOpen,setIsOpen,h
     />
     <input
       type="number"
-      placeholder="Price"
+    //   placeholder="Price"
       className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
       value = {editData.price}
       onChange={(e)=>{

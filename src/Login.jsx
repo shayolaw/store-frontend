@@ -45,7 +45,7 @@ function Login() {
         console.log(user)
         })
         .catch((error) => {
-         setMessage("Invalid Username or Password")
+         setMessage("Invalid Username or Passworde")
          console.error("Sign in error", error);
         });
         // console.log(response)
@@ -67,7 +67,7 @@ function Login() {
               id="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              placeholder="Enter your email" 
+              // placeholder="Enter your email" 
               required
             />
           </div>
@@ -78,7 +78,7 @@ function Login() {
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              placeholder="Enter your password" 
+              // placeholder="Enter your password" 
               required
             />
           </div>
