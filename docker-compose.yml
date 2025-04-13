@@ -1,0 +1,15 @@
+services:
+  artemis-frontend:
+    build: .
+    command: npm run dev
+    ports:
+      - "3000:5173"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: ./app
+          ignore:
+            - node_modules/
+    
+
