@@ -1,11 +1,14 @@
 import React from 'react'
 import axios from "../api/axios"
 import { useEffect,useState } from 'react'
+import { useSelector } from 'react-redux'
 import Product from './Product'
 import EditProduct from './Modals/EditProduct'
 
 
 export default function Products() {
+  const myCart = useSelector((state)=>state.cart)
+  console.log(myCart)
   const [formData,setFormData] = useState({
     "name" : "",
     "description" : "",

@@ -2,15 +2,25 @@ import React, { useContext, useState } from "react";
 import { ShoppingCart, Menu, X, User } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate, redirect, useNavigate } from "react-router";
+import { Link } from "react-router";
+import { useSelector } from "react-redux";
+import { selectCount, totalAmount,totalTax } from "./cartSlice";
+import { persistor } from "./store";
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const {auth,setAuth} = useContext(AuthContext);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const cartCount = useSelector(selectCount);
+  const cartTotal = useSelector(totalAmount)
+  const cartTax = useSelector(totalTax)
+  const cart = useSelector((state)=>state.cart)
 
    function logout(){
     alert("here")
     setAuth({})
     localStorage.clear();
+    persistor.purge()
     window.location.href = "/login";
   }
 
@@ -24,8 +34,8 @@ export default function NavBar() {
           {/* Navigation Links - Hidden on Mobile */}
           <div className="hidden md:flex space-x-6 text-white">
             <a href="#" className="hover:text-red-500 text-white">Home</a>
-            <a href="#" className="hover:text-blue-500 text-white">Shop</a>
-            <a href="/products" className="hover:text-blue-500">About</a>
+            <Link to="/shop" className="hover:text-blue-500 text-white">Shop</Link>
+            <Link to="/products" className="hover:text-blue-500 text-white">Products</Link>
             <a href="" className="hover:text-blue-500">Contact</a>
           </div>
 
@@ -45,11 +55,57 @@ export default function NavBar() {
           <div className="flex items-center space-x-4">
             {/* Cart Icon */}
             <div className="relative cursor-pointer">
-              <ShoppingCart className="h-6 w-6 text-white hover:text-blue-500" />
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="relative">
+              <ShoppingCart onClick={() => setDropdownOpen(!dropdownOpen)} className="h-6 w-6 text-white hover:text-blue-500" />
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
-                3
+                {cartCount}
               </span>
+              </button>{/* Dropdown */}
+        {dropdownOpen && (
+          <div className="absolute right-0 mt-2 bg-white border rounded-lg shadow-lg w-80 max-h-96 overflow-y-auto z-10">
+            <div className="p-4">
+              <h3 className="text-lg font-semibold">Your Cart</h3>
+              {/* Cart items */}
+              <div className="space-y-4">
+                {cart.map((item, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex gap-4">
+                      <div className="w-14 h-14 bg-gray-200 rounded-md"></div>
+                      <div>
+                        <p className="font-medium"> {item.name}</p>
+                        <p className="text-sm text-gray-500">Qty: {item.count}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-semibold">${item.price}</p>
+                      <button className="text-xs text-red-500 hover:underline mt-1">Remove</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Price Summary */}
+              <div className="flex justify-between text-sm mt-4">
+                <span>Subtotal</span>
+                <span>{cartTotal}</span>
+              </div>
+              <div className="flex justify-between text-sm mt-2">
+                <span>Tax</span>
+                <span>{cartTax}</span>
+              </div>
+              <div className="flex justify-between font-semibold text-lg mt-4">
+                <span>Total</span>
+                <span>${(Number(cartTotal) + Number(cartTax)).toFixed(2)}</span>
+              </div>
+
+              {/* Checkout Button */}
+              <button className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+                Checkout
+              </button>
             </div>
+          </div> )}
+            </div>
+           
 
             {/* User Dropdown */}
             <div className="cursor-pointer hover:text-blue-500">
@@ -59,8 +115,8 @@ export default function NavBar() {
                     <a href="/login">Login</a>
                 </span> :
                  <span>
-                <p class="text-white">Welcome {auth.name}</p>
-                 <a class="text-white" onClick={logout}>Logout</a>
+                <p className="text-white">Welcome {auth.name}</p>
+                 <a className="text-white" onClick={logout}>Logout</a>
              </span>
             }
             
