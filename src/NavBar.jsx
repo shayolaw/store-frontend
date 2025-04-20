@@ -2,17 +2,23 @@ import React, { useContext, useState } from "react";
 import { ShoppingCart, Menu, X, User } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { Navigate, redirect, useNavigate } from "react-router";
+import axios from "../api/axios";
 import { Link } from "react-router";
-import { useSelector } from "react-redux";
-import { selectCount, totalAmount,totalTax } from "./cartSlice";
+import { useSelector,useDispatch } from "react-redux";
+import { selectCount, totalAmount,totalTax,clear } from "./cartSlice";
 import { persistor } from "./store";
+import { toast } from 'react-toastify';
+
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const {auth,setAuth} = useContext(AuthContext);
+  const [message,setMessage] = useState({});
+  const [messageState,setMessageState] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const cartCount = useSelector(selectCount);
   const cartTotal = useSelector(totalAmount)
+  const dispatch = useDispatch()
   const cartTax = useSelector(totalTax)
   const cart = useSelector((state)=>state.cart)
 
@@ -21,7 +27,30 @@ export default function NavBar() {
     setAuth({})
     localStorage.clear();
     persistor.purge()
+   
     window.location.href = "/login";
+  }
+  function Checkout(){
+    let formData = {
+      "user_id": auth.id,
+      "sub_total":cartTotal,
+      "total_tax":cartTax,
+      "total_price": (Number(cartTotal) + Number(cartTax)).toFixed(2),
+      "products": [...cart]
+    }
+    console.log(formData);
+    const response = axios.post('/orders',formData).then(response=>{
+      //Write a success message
+      
+      dispatch(clear());
+      persistor.purge();
+      toast.success("Order Created")
+      console.log("Order Created", response.data);
+      //clear the cart store
+
+    }).catch((error)=>{
+      console.log(error)
+    })
   }
 
   return (
@@ -37,7 +66,8 @@ export default function NavBar() {
             <Link to="/shop" className="hover:text-blue-500 text-white">Shop</Link>
             <Link to="/products" className="hover:text-blue-500 text-white">Products</Link>
             <a href="" className="hover:text-blue-500">Contact</a>
-          </div>
+        </div>
+
 
           {/* Search Bar */}
           <div className="hidden md:flex  max-w-md">
@@ -73,7 +103,7 @@ export default function NavBar() {
                       <div className="w-14 h-14 bg-gray-200 rounded-md"></div>
                       <div>
                         <p className="font-medium"> {item.name}</p>
-                        <p className="text-sm text-gray-500">Qty: {item.count}</p>
+                        <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
                       </div>
                     </div>
                     <div className="text-right">
@@ -99,7 +129,7 @@ export default function NavBar() {
               </div>
 
               {/* Checkout Button */}
-              <button className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+              <button onClick={Checkout} className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
                 Checkout
               </button>
             </div>

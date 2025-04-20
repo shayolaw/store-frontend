@@ -74,7 +74,7 @@ const [messageType, setMessageType] = useState("")
     setMessageType("")
   }, 3000)
   return (
-<div className="p-8 max-w-5xl mx-auto">
+<div className="p-8 max-w-5xl mx-auto bg-yellow-200">
 {message && (
   <div className={`p-4 mb-6 text-center rounded-lg 
     ${messageType === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"}
@@ -137,7 +137,7 @@ const [messageType, setMessageType] = useState("")
       Add Product
     </button>
   </div>
-  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     {products.map((product)=>
     <Product
      key={product.id}

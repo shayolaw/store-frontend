@@ -7,6 +7,9 @@ import Products from './Products.jsx'
 import Shop from './Shop.jsx'
 import { AuthContext } from '../context/AuthContext.jsx'
 import NavBar from './NavBar.jsx'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function MyApp() {
     const [auth,setAuth] = useState({})
@@ -23,6 +26,7 @@ export default function MyApp() {
 
     <AuthContext.Provider value={{auth,setAuth}}>
     <NavBar  />
+    <ToastContainer />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />

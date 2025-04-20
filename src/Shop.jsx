@@ -78,13 +78,13 @@ export default function Shop() {
                                     >
                                         Buy
                                     </button>
-                                    <button onClick={()=>handleIncrement(product.id)} className='bg-blue-600 text-white'>
+                                    <button onClick={()=>handleIncrement(product.id)} className='bg-blue-600 text-white px-2 py-1 hover:pointer'>
                                         +
                                     </button>
-                                    <button onClick={()=>handleDecrement(product.id)} className='bg-blue-600 text-white'>
+                                    <button onClick={()=>handleDecrement(product.id)} className='bg-blue-600 text-white px-2 py-1'>
                                         -
                                     </button>
-                                    <button onClick={()=>handleRemove(product.id)} className='bg-red-600 text-white'>
+                                    <button onClick={()=>handleRemove(product.id)} className='bg-red-600 text-white px-2 py-1'>
                                         []
                                     </button>
                                 </div>
