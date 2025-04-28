@@ -12,7 +12,7 @@ function Login() {
   const navigate = useNavigate()
   const {auth,setAuth} = useContext(AuthContext)
   const [password, setPassword] = useState("");
-  const user = useContext(AuthContext)
+  // const user = useContext(AuthContext)
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
@@ -25,10 +25,10 @@ function Login() {
     setAuth({})
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
- 
+  const handleSubmit = () => {
+   
     axios.get('/sanctum/csrf-cookie').then(response => {
+   
         axios.post("/api/login", { email: email, password: password })
         .then((response) => {
          console.log("Sign in successful", response.data);
@@ -50,15 +50,15 @@ function Login() {
         });
         // console.log(response)
     }).catch((error)=>{
-        setMessage(error.message)
+        setMessage("Network Error")
     })
   };
 
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
+        <h2>Login To Your Account</h2>
+        <form>
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <span className="text-red-500 text-xs"> {message}</span>
@@ -67,7 +67,7 @@ function Login() {
               id="email" 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              // placeholder="Enter your email" 
+              placeholder="Enter your email" 
               required
             />
           </div>
@@ -78,11 +78,11 @@ function Login() {
               id="password" 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              // placeholder="Enter your password" 
+              placeholder="Enter your password" 
               required
             />
           </div>
-          <button type="submit" className="login-btn">Login</button>
+          <button data-testid="loginbutton" onClick={handleSubmit} type="submit" className="login-btn" >Login</button>
         </form>
       </div>
     </div>

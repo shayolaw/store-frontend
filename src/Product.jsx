@@ -12,7 +12,7 @@ export default function Product({item,setEditFormData,editData,isOpen,setIsOpen,
             <p className="text-green-600 font-bold mb-4">${item.price}</p>
 
             <div className="flex gap-2 mx-auto">
-            <button className="bg-yellow-400 text-white py-1 px-4 rounded hover:bg-yellow-500 transition text-sm"
+            <button data-testid="editbutton" className="bg-yellow-400 text-white py-1 px-4 rounded hover:bg-yellow-500 transition text-sm"
             onClick={()=>{
                 setEditFormData(item)
                 setIsOpen(!isOpen)
@@ -20,8 +20,8 @@ export default function Product({item,setEditFormData,editData,isOpen,setIsOpen,
             >
                 Edit
             </button>
-            <button className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition text-sm"
-            onClick = {()=>deleteData(item.id)}
+            <button data-testid="deletebutton" className="bg-red-500 text-white py-1 px-4 rounded hover:bg-red-600 transition text-sm"
+            onClick = {()=>deleteData(item.id)} 
             >
                 Delete
             </button>

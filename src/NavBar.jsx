@@ -84,10 +84,10 @@ export default function NavBar() {
           {/* Icons: Cart & User */}
           <div className="flex items-center space-x-4">
             {/* Cart Icon */}
-            <div className="relative cursor-pointer">
-              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="relative">
-              <ShoppingCart onClick={() => setDropdownOpen(!dropdownOpen)} className="h-6 w-6 text-white hover:text-blue-500" />
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+            <div data-testid="cart" className="relative cursor-pointer" >
+              <button onClick={() => setDropdownOpen(!dropdownOpen)} className="relative" >
+              <ShoppingCart data-testid="showDropdown" onClick={() => setDropdownOpen(!dropdownOpen)} className="h-6 w-6 text-white hover:text-blue-500" />
+              <span data-testid="cartCount" className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                 {cartCount}
               </span>
               </button>{/* Dropdown */}
@@ -96,7 +96,7 @@ export default function NavBar() {
             <div className="p-4">
               <h3 className="text-lg font-semibold">Your Cart</h3>
               {/* Cart items */}
-              <div className="space-y-4">
+              <div className="space-y-4" data-testid="cartitems">
                 {cart.map((item, index) => (
                   <div key={index} className="flex items-center justify-between">
                     <div className="flex gap-4">
@@ -129,7 +129,7 @@ export default function NavBar() {
               </div>
 
               {/* Checkout Button */}
-              <button onClick={Checkout} className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
+              <button data-testid="CheckoutButton" onClick={Checkout} className="w-full bg-black text-white py-2 rounded-lg hover:bg-gray-800 transition">
                 Checkout
               </button>
             </div>

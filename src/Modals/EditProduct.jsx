@@ -9,8 +9,8 @@ export default function EditProduct({setEditFormData,editData,isOpen,setIsOpen,h
       Open Dialog
     </Button> */}
     <Dialog open={isOpen} handler={()=>{setIsOpen(!isOpen)}}>
-      <DialogHeader className='text-black'>Edit Product.</DialogHeader>
-      <DialogBody className='text-black'>
+      <DialogHeader className='text-black'>Edit Product.</DialogHeader> 
+     <DialogBody className='text-black'>
       <input
       type="text"
     //   placeholder="Product Name"

@@ -7,5 +7,10 @@ export default defineConfig({
   build: {
     target: 'es2015', // not 'modules' or 'esnext'
   },
-  plugins: [react(), tailwindcss(),]
+  plugins: [react(), tailwindcss(),],
+  test: {
+    environment: 'jsdom',
+    globals:true,
+    setupFiles:'./src/__tests__/setup.js'
+  }
 })

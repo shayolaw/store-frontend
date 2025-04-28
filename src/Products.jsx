@@ -8,10 +8,10 @@ import EditProduct from './Modals/EditProduct'
 
 export default function Products() {
   const myCart = useSelector((state)=>state.cart)
-  console.log(myCart)
+  // console.log(myCart)
   const [formData,setFormData] = useState({
     "name" : "",
-    "description" : "",
+    "description" : null,
     "price" : "",
   })
   const [editFormData,setEditFormData] = useState({
@@ -82,12 +82,15 @@ const [messageType, setMessageType] = useState("")
     {message}
   </div>
   )}
-  <EditProduct 
+
+<EditProduct 
   setEditFormData={setEditFormData} 
   editData={editFormData} 
   handleEditForm = {handleEditForm}
   isOpen={open} 
   setIsOpen={setOpen}/>
+
+  
   <h2 className="text-4xl font-bold mb-8 text-center text-gray-800">
     Product Management
   </h2>
@@ -115,7 +118,7 @@ const [messageType, setMessageType] = useState("")
           "description" : e.target.value
         })
       }}
-      placeholder = {formData.description ? "" : "Enter Description"}
+      placeholder = {formData.description ? "n" : "Enter Description"}
       className="border p-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
     />
     <input
@@ -133,6 +136,7 @@ const [messageType, setMessageType] = useState("")
     <button
       className="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition"
       onClick={handleSubmit}
+      data-testid = "submitForm"
     >
       Add Product
     </button>
