@@ -12,5 +12,21 @@ export default defineConfig({
     environment: 'jsdom',
     globals:true,
     setupFiles:'./src/__tests__/setup.js'
-  }
+  },
+  server: {
+    // Add Ngrok URL to allowedHosts
+    allowedHosts: ['frontend.shayolaw.ca'],
+    // proxy: {
+    //   '/api': {
+    //     target: 'http://localhost:80',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    //   '/sanctum': {
+    //     target: 'http://localhost:80',
+    //     changeOrigin: true,
+    //     secure: false,
+    //   },
+    // },
+  },
 })

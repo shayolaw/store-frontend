@@ -5,13 +5,11 @@ import { useContext } from "react";
 
 
 
-const instance = axios.create({
-    baseURL : "http://localhost:80/",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    withCredentials: true,
-    withXSRFToken: true,
+const instance = axios.create({ 
+    baseURL : "https://api.shayolaw.ca",
+      //  baseURL : "http://localhost:80/",
+    // withCredentials: true,
+    // // withXSRFToken: true,
 })
 instance.defaults.withCredentials = true;
 instance.defaults.withXSRFToken = true
@@ -26,6 +24,6 @@ instance.interceptors.response.use(function (response) {
         localStorage.clear();
         window.location.href = "/login";
     }
-    // return Promise.reject(error);
+    return Promise.reject(error);
   })
 export default instance

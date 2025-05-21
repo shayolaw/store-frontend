@@ -28,7 +28,7 @@ function Login() {
   const handleSubmit = () => {
    
     axios.get('/sanctum/csrf-cookie').then(response => {
-   
+        console.log(response)
         axios.post("/api/login", { email: email, password: password })
         .then((response) => {
          console.log("Sign in successful", response.data);
@@ -48,7 +48,7 @@ function Login() {
          setMessage("Invalid Username or Passworde")
          console.error("Sign in error", error);
         });
-        // console.log(response)
+        console.log(response)
     }).catch((error)=>{
         setMessage("Network Error")
     })
@@ -58,7 +58,7 @@ function Login() {
     <div className="login-container">
       <div className="login-card">
         <h2>Login To Your Account</h2>
-        <form>
+        {/* <form> */}
           <div className="input-group">
             <label htmlFor="email">Email</label>
             <span className="text-red-500 text-xs"> {message}</span>
@@ -83,7 +83,7 @@ function Login() {
             />
           </div>
           <button data-testid="loginbutton" onClick={handleSubmit} type="submit" className="login-btn" >Login</button>
-        </form>
+        {/* </form> */}
       </div>
     </div>
   );

@@ -44,7 +44,9 @@ export default function NavBar() {
       
       dispatch(clear());
       persistor.purge();
-      toast.success("Order Created")
+      const stripe_url = response.data.url
+      window.location.href = stripe_url
+      // toast.success("Order Created")
       console.log("Order Created", response.data);
       //clear the cart store
 
